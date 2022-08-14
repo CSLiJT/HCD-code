@@ -44,17 +44,15 @@ def train_test(data: pd.DataFrame, valid_data: pd.DataFrame = None, know_graph: 
     torch.cuda.empty_cache()
 
 if __name__ == '__main__':
-    data = pd.read_csv(osp.join(DATA_PATH,'data.csv'), index_col=0)
+    #data = pd.read_csv(osp.join(DATA_PATH,'data.csv'), index_col=0)
     know_graph = pd.read_csv(osp.join(DATA_PATH,'hier.csv'))
     #know_graph=pd.DataFrame()
     Q_matrix = np.loadtxt(osp.join(DATA_PATH, 'Q_matrix.txt'), delimiter=' ')
     n_user=hparams['n_user']
     n_item=hparams['n_item']
     n_know=hparams['n_know']
-    print(data.shape)
-    print(data.head())
-    train_data=pd.read_csv(DATA_PATH+'train_0.8_0.2.csv')
-    test_data=pd.read_csv(DATA_PATH+'test_0.8_0.2.csv')
+    train_data=pd.read_csv(osp.join(DATA_PATH,'train_0.8_0.2.csv'))
+    test_data=pd.read_csv(osp.join(DATA_PATH,'test_0.8_0.2.csv'))
     for i in range(1):
         train_test(train_data, test_data, know_graph, Q_matrix)
 

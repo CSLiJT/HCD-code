@@ -11,7 +11,7 @@ import torch
 import torch.nn as nn
 import warnings
 
-from config import hparams, JUNYI_PATH
+from config import hparams, DATA_PATH
 from dataloader import TrainDataLoader
 from itf import mirt2pl, sigmoid_dot, dot, itf_dict
 from tools import Logger, df_preview, labelize, to_numpy
@@ -377,11 +377,11 @@ def test(hparams):
     n_know = hparams['n_know']
     hidden_dim = hparams['hidden_dim']
 
-    data = pd.read_csv(JUNYI_PATH+'data_demo.csv',index_col = 0)
+    data = pd.read_csv(DATA_PATH+'data_demo.csv',index_col = 0)
     data = data.sample(frac=1).reset_index(drop=True)
     print(data.head())
-    know_graph = pd.read_csv(JUNYI_PATH+'hierarchy_demo.csv',index_col = 0)
-    Q_matrix = np.loadtxt(JUNYI_PATH+'Q_matrix_demo.txt', delimiter=' ')
+    know_graph = pd.read_csv(DATA_PATH+'hierarchy_demo.csv',index_col = 0)
+    Q_matrix = np.loadtxt(DATA_PATH+'Q_matrix_demo.txt', delimiter=' ')
 
     net = HierCDM(n_user, n_item, n_know, hidden_dim, know_graph)
 
